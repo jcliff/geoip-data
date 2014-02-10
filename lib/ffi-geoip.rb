@@ -5,6 +5,8 @@ module GeoIP
   extend FFI::Library
   ffi_lib File.expand_path(File.join(File.dirname(__FILE__), 'libGeoIP.so'))
 
+  DEFAULT_DATABASE_FILE = File.expand_path(File.join(File.dirname(__FILE__), '../GeoLiteCity.dat'))
+
   # GEOIP_API GeoIP* GeoIP_open(const char * filename, int flags)
   attach_function :db_open, :GeoIP_open, [:string, :int], :pointer
   # GEOIP_API void GeoIP_delete(GeoIP* gi);
@@ -63,13 +65,20 @@ module GeoIP
       (GeoIP.db_free(@db); @db=nil) if @db; true
     end
   end
+
+  def self.city(db_file=DEFAULT_DATABASE_FILE, &blk)
+    GeoIP::City.new(db_file, &blk)
+  end
 end
 
 if __FILE__ == $0
   require 'pp'
-  db = GeoIP::City.new('GeoLiteCity.dat')
-  ARGV.each{|ip| pp db.lookup(ip) }
-  db.close
+  #db = GeoIP::City.new('GeoLiteCity.dat')
+  #ARGV.each{|ip| pp db.lookup(ip) }
+  #db.close
+  GeoIP.city{|db|
+    ARGV.each{|ip| pp db.lookup(ip) }
+  }
 end
 
 __END__
