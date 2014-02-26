@@ -3,7 +3,7 @@ require 'ffi'
 
 module GeoIP
   extend FFI::Library
-  ffi_lib File.expand_path(File.join(File.dirname(__FILE__), 'libGeoIP.so'))
+  ffi_lib ['GeoIP', File.expand_path(File.join(File.dirname(__FILE__), 'libGeoIP.so'))]
 
   DEFAULT_DATABASE_FILE = File.expand_path(File.join(File.dirname(__FILE__), '../GeoLiteCity.dat'))
 
