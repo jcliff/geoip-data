@@ -3,13 +3,13 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "ffi-geoip"
-  s.version     = "0.0.1"
+  s.version     = "0.0.3"
   s.authors     = ["lian"]
   s.email       = ["meta.rb@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{ffi-geoip}
   s.description = %q{ffi-geoip}
-  s.homepage    = "https://github.com/lian/ffi-geoip"
+  s.homepage    = "https://github.com/coinbase/geoip-data"
 
   s.rubyforge_project = "ffi-geoip"
 
